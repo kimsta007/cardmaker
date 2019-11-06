@@ -148,9 +148,26 @@ public class CardMakerDAO {
 	}
 	
 	//Return everything related to this element
-	public void addTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
-			String pageID, String cardID) {
-		
+	public String addTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String pageID, String cardID) throws Exception {
+		try {
+			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
+			ps.setNull(1,0);
+			ps.setString (2, text);
+			ps.setInt(3, Integer.parseInt(xOrient));
+			ps.setInt(4, Integer.parseInt(yOrient));			
+			ps.setInt(5, Integer.parseInt(width));
+			ps.setInt(6, Integer.parseInt(height));			
+			ps.setString(7, font);
+			ps.setInt(8, Integer.parseInt(fontSize));			
+			ps.setInt(9, Integer.parseInt(pageID));
+			ps.setInt(10, Integer.parseInt(cardID));			
+			ps.execute();
+			ps.close();
+			return "Text Inserted.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to create card." + ex.getMessage());
+		}
 	}
 	
 	public String deleteTextElement(String textID) throws Exception {
@@ -181,8 +198,24 @@ public class CardMakerDAO {
 	}
 	
 	//Return everything related to this element
-	public void addImageElement(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) {
-		
+	public String addImageElement(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) 
+	throws Exception {
+		try {
+			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
+			ps.setNull(1,0);
+			ps.setString (2, name);
+			ps.setInt(3, Integer.parseInt(xOrient));
+			ps.setInt(4, Integer.parseInt(yOrient));			
+			ps.setInt(5, Integer.parseInt(width));
+			ps.setInt(6, Integer.parseInt(height));			
+			ps.setInt(7, Integer.parseInt(pageID));
+			ps.setInt(8, Integer.parseInt(cardID));			
+			ps.execute();
+			ps.close();
+			return "Image Inserted.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to create card." + ex.getMessage());
+		}
 	}
 	
 	public String updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) throws Exception{

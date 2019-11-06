@@ -35,10 +35,8 @@ public class DeleteCardHandler implements RequestStreamHandler {
 		}
 
 		try {
-			String rName = parsedValues.get("recipientName");
-			String eType = parsedValues.get("eventType");
-			String rEmail = parsedValues.get("recipientEmail");
-			this.formatResponse(new Gson().toJson(dao.deleteCard(rName, eType, rEmail)), 200);
+			String cardID = parsedValues.get("cardID");
+			this.formatResponse(new Gson().toJson(dao.deleteCard(cardID)), 200);
 		} catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

@@ -44,12 +44,10 @@ public class CardMakerDAO {
 			return listAllCards();
 	}
 	
-	//use ID to delete its cleaner
-	public String deleteCard(String rName, String eType, String rEmail) throws Exception {
+	public String deleteCard(String cardID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.card where recipientID = " + getRecipientID(rName, rEmail) + " and eventTypeID = " + 
-			Integer.parseInt(eType) + ";");
+				conn.prepareStatement("delete from cs509db.card where recipientID = " + Integer.parseInt(cardID) + ";");
 				ps.execute();
 				ps.close();
 			return "Card deleted.";
@@ -123,11 +121,10 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//use ID to delete its cleaner
-	public String deleteRecipient(String rName, String rEmail) throws Exception{
+	public String deleteRecipient(String recipientID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.recipient where recipientID = " + getRecipientID(rName, rEmail) + ";");
+				conn.prepareStatement("delete from cs509db.recipient where recipientID = " + Integer.parseInt(recipientID) + ";");
 				ps.execute();
 				ps.close();
 			return "Recipient deleted.";
@@ -136,12 +133,12 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//use ID to update its cleaner
-	public String updateRecipient(String rName, String rSurname, String rEmail) throws Exception {
+	
+	public String updateRecipient(String rName, String rSurname, String rEmail, String recipientID) throws Exception {
 		try {
 			PreparedStatement ps = 
 				conn.prepareStatement("update cs509db.recipient set recipientName = " + rName + ", recipientSurname = "+ rSurname +
-						", recipientEmail = " + rEmail + " where recipientID = " + getRecipientID(rName, rEmail) + ";");
+						", recipientEmail = " + rEmail + " where recipientID = " + Integer.parseInt(recipientID) + ";");
 				ps.execute();
 				ps.close();
 			return "Recipient updated.";
@@ -171,7 +168,6 @@ public class CardMakerDAO {
 		
 	}
 	
-	//and this as well
 	public void updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) {
 		
 	}

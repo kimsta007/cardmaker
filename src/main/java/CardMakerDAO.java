@@ -29,7 +29,7 @@ public class CardMakerDAO {
         return recipientID;
 	}
 	
-	public String createCard(String xOrient, String eType, String rName, String rEmail) throws Exception {
+	public ArrayList<HashMap<String, String>> createCard(String xOrient, String eType, String rName, String rEmail) throws Exception {
 		try {
 			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.card values(?,?,?,?)");
 			ps.setNull(1,0);
@@ -38,12 +38,13 @@ public class CardMakerDAO {
 			ps.setInt(4, getRecipientID(rName, rEmail));			
 			ps.execute();
 			ps.close();
-			return "Card created.";
 		} catch (Exception ex) {
 			throw new Exception("Failed to create card." + ex.getMessage());
 		}
+			return listAllCards();
 	}
 	
+	//use ID to delete its cleaner
 	public String deleteCard(String rName, String eType, String rEmail) throws Exception {
 		try {
 			PreparedStatement ps = 
@@ -107,43 +108,80 @@ public class CardMakerDAO {
 	        }
 	}
 	
-	private void dumby() {
+	public String addRecipient(String rName, String rSurname, String rEmail) throws Exception {
+		try {
+			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.recipient values(?,?,?,?)");
+			ps.setNull(1,0);
+			ps.setString(2, rName);
+			ps.setString(3, rSurname);
+			ps.setString(4, rEmail);			
+			ps.execute();
+			ps.close();
+			return "Recipient Added.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to add recipient."	+ ex.getMessage());
+		}
+	}
+	
+	//use ID to delete its cleaner
+	public String deleteRecipient(String rName, String rEmail) throws Exception{
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("delete from cs509db.recipient where recipientID = " + getRecipientID(rName, rEmail) + ";");
+				ps.execute();
+				ps.close();
+			return "Recipient deleted.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to delete recipient." + ex.getMessage());
+		}
+	}
+	
+	//use ID to update its cleaner
+	public String updateRecipient(String rName, String rSurname, String rEmail) throws Exception {
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update cs509db.recipient set recipientName = " + rName + ", recipientSurname = "+ rSurname +
+						", recipientEmail = " + rEmail + " where recipientID = " + getRecipientID(rName, rEmail) + ";");
+				ps.execute();
+				ps.close();
+			return "Recipient updated.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to update recipient." + ex.getMessage());
+		}
+	}
+	
+	//Return everything related to this element
+	public void addTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String pageID, String cardID) {
 		
 	}
 	
-	public void addRecipient() {
-		
-	}
-	
-	public void deleteRecipient() {
-		
-	}
-	
-	public void updateRecipient() {
-		
-	}
-	
-	public void addTextElement() {
-		
-	}
-	
-	public void deleteTextElement() {
+	public void deleteTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String textID) {
 		
 	}
 
-	public void updateTextElement() {
+	public void updateTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String textID) {
 		
 	}
 	
-	public void addImageElement() {
+	//Return everything related to this element
+	public void addImageElement(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) {
 		
 	}
 	
-	public void updateImageElement() {
+	//and this as well
+	public void updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) {
 		
 	}
 	
-	public void deleteImageElement() {
+	public void deleteImageElement(String imageID) {
+		
+	}
+	
+	//Get card with all its elements for reconstruction 
+	public void getCard() {
 		
 	}
 }

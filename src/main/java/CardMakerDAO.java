@@ -137,8 +137,8 @@ public class CardMakerDAO {
 	public String updateRecipient(String rName, String rSurname, String rEmail, String recipientID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.recipient set recipientName = " + rName + ", recipientSurname = "+ rSurname +
-						", recipientEmail = " + rEmail + " where recipientID = " + Integer.parseInt(recipientID) + ";");
+				conn.prepareStatement("update cs509db.recipient set recipientName = '" + rName + "', recipientSurname = '"+ rSurname +
+						"', recipientEmail = '" + rEmail + "' where recipientID = " + Integer.parseInt(recipientID) + ";");
 				ps.execute();
 				ps.close();
 			return "Recipient updated.";
@@ -153,14 +153,31 @@ public class CardMakerDAO {
 		
 	}
 	
-	public void deleteTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
-			String textID) {
-		
+	public String deleteTextElement(String textID) throws Exception {
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("delete from cs509db.text where textID = " + Integer.parseInt(textID) + ";");
+				ps.execute();
+				ps.close();
+			return "Text deleted.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to delete recipient." + ex.getMessage());
+		}
 	}
 
-	public void updateTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
-			String textID) {
-		
+	public String updateTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String textID) throws Exception{
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update cs509db.text set name = " + text + ", xOrient = "+ Integer.parseInt(xOrient) +
+						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
+						", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + "where textID = " + Integer.parseInt(textID) + ";");
+				ps.execute();
+				ps.close();
+			return "Text updated.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to update Text." + ex.getMessage());
+		}
 	}
 	
 	//Return everything related to this element
@@ -168,12 +185,30 @@ public class CardMakerDAO {
 		
 	}
 	
-	public void updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) {
-		
+	public String updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) throws Exception{
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update cs509db.image set name = " + name + ", xOrient = "+ Integer.parseInt(xOrient) +
+						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
+						"where imageID = " + Integer.parseInt(imageID) + ";");
+				ps.execute();
+				ps.close();
+			return "Image updated.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to update Image." + ex.getMessage());
+		}
 	}
 	
-	public void deleteImageElement(String imageID) {
-		
+	public String deleteImageElement(String imageID) throws Exception {
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("delete from cs509db.image where imageID = " + Integer.parseInt(imageID) + ";");
+				ps.execute();
+				ps.close();
+			return "Image deleted.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to delete Image." + ex.getMessage());
+		}
 	}
 	
 	//Get card with all its elements for reconstruction 

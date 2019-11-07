@@ -35,11 +35,11 @@ public class CreateCardHandler implements RequestStreamHandler {
 		}
 
 		try {
-			String xOrient = parsedValues.get("cardOrientation");
+			String cOrient = parsedValues.get("cardOrientation");
 			String rName = parsedValues.get("recipientName");
 			String rEmail = parsedValues.get("recipientEmail");
 			String eType = parsedValues.get("eventType");
-			this.formatResponse(new Gson().toJson(dao.createCard(xOrient, eType, rName, rEmail)), 200);
+			this.formatResponse(new Gson().toJson(dao.createCard(cOrient, eType, rName, rEmail)), 200);
 		} catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

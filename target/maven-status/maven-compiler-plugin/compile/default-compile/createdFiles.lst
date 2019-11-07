@@ -1,7 +1,13 @@
 CardMakerDAO.class
 ListCardsHandler.class
+UpdateImageElementHandler.class
+AddImageElementHandler.class
 ParseJSON.class
-DeleteCardHandler.class
+DeleteTextElementHandler.class
 CreateCardHandler.class
 DBUtils.class
 JSONUtils.class
+DeleteImageElementHandler.class
+UpdateTextElementHandler.class
+AddTextElementHandler.class
+DeleteCardHandler.class

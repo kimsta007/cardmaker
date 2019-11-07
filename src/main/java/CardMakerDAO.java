@@ -147,9 +147,9 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//Return everything related to this element
-	public String addTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+	public HashMap<String, String> addTextElement(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
 			String pageID, String cardID) throws Exception {
+		HashMap<String, String> textMap = new HashMap<String, String>();
 		try {
 			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setNull(1,0);
@@ -163,10 +163,63 @@ public class CardMakerDAO {
 			ps.setInt(9, Integer.parseInt(pageID));
 			ps.setInt(10, Integer.parseInt(cardID));			
 			ps.execute();
-			ps.close();
-			return "Text Inserted.";
+			ps.close();			
 		} catch (Exception ex) {
-			throw new Exception("Failed to create card." + ex.getMessage());
+			throw new Exception("Failed to create Text Element." + ex.getMessage());
+		}
+		textMap.put("text", text);
+		textMap.put("xOrient", xOrient);
+		textMap.put("yOrient", yOrient);
+		textMap.put("width", width);
+		textMap.put("height", height);
+		textMap.put("font", font);
+		textMap.put("fontSize", fontSize);
+		textMap.put("pageID", pageID);
+		textMap.put("cardID", cardID);
+		textMap.put("textID", Integer.toString(getTextElementByID(text, xOrient, yOrient, width, height, font, fontSize, pageID, cardID)));
+		return textMap;
+	}
+	
+	public int getTextElementByID(String text, String xOrient, String yOrient, String width, String height, String font, String fontSize,
+			String pageID, String cardID) throws Exception {
+        int elementID = 0;
+		try {
+		PreparedStatement ps = conn.prepareStatement(
+        		"Select textID from text where text = '" + text + "', xOrient = " + Integer.parseInt(xOrient) + ", yOrient = " + 
+        				Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
+        					", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + ", pageID = " + Integer.parseInt(pageID) + 
+        					", cardID = " + Integer.parseInt(cardID) + ";"
+        );	    
+        ResultSet resultSet = ps.executeQuery();	
+        while (resultSet.next()) {
+        	elementID = resultSet.getInt("textID");        	
+        }
+        resultSet.close();
+        ps.close();
+		return elementID;
+		} catch (Exception ex) {
+			throw new Exception("Failed to locate textElement." + ex.getMessage());
+		}
+	}
+	
+	public int getImageElementByID(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) 
+			throws Exception {
+        int elementID = 0;
+		try {
+		PreparedStatement ps = conn.prepareStatement(
+        		"Select imageID from image where name = '" + name + "', xOrient = " + Integer.parseInt(xOrient) + ", yOrient = " + 
+        				Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
+        				 ", pageID = " + Integer.parseInt(pageID) + ", cardID = " + Integer.parseInt(cardID) + ";"
+        );	    
+        ResultSet resultSet = ps.executeQuery();	
+        while (resultSet.next()) {
+        	elementID = resultSet.getInt("imageID");        	
+        }
+        resultSet.close();
+        ps.close();
+		return elementID;
+		} catch (Exception ex) {
+			throw new Exception("Failed to locate imageElement." + ex.getMessage());
 		}
 	}
 	
@@ -186,7 +239,7 @@ public class CardMakerDAO {
 			String textID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.text set name = " + text + ", xOrient = "+ Integer.parseInt(xOrient) +
+				conn.prepareStatement("update cs509db.text set text = " + text + ", xOrient = "+ Integer.parseInt(xOrient) +
 						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
 						", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + "where textID = " + Integer.parseInt(textID) + ";");
 				ps.execute();
@@ -197,9 +250,9 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//Return everything related to this element
-	public String addImageElement(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) 
+	public HashMap<String, String> addImageElement(String name, String xOrient, String yOrient, String width, String height, String pageID, String cardID) 
 	throws Exception {
+		HashMap<String, String> imageMap = new HashMap<String, String>();
 		try {
 			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setNull(1,0);
@@ -212,10 +265,18 @@ public class CardMakerDAO {
 			ps.setInt(8, Integer.parseInt(cardID));			
 			ps.execute();
 			ps.close();
-			return "Image Inserted.";
 		} catch (Exception ex) {
-			throw new Exception("Failed to create card." + ex.getMessage());
+			throw new Exception("Failed to create Image Element." + ex.getMessage());
 		}
+		imageMap.put("name", name);
+		imageMap.put("xOrient", xOrient);
+		imageMap.put("yOrient", yOrient);
+		imageMap.put("width", width);
+		imageMap.put("height", height);
+		imageMap.put("pageID", pageID);
+		imageMap.put("cardID", cardID);
+		imageMap.put("imageID", Integer.toString(getImageElementByID(name, xOrient, yOrient, width, height, pageID, cardID)));
+		return imageMap;
 	}
 	
 	public String updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) throws Exception{
@@ -244,8 +305,8 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//Get card with all its elements for reconstruction 
-	public void getCard() {
+	//Note yet sure how to return that...
+	public void getCard(String cardID) {
 		
 	}
 }

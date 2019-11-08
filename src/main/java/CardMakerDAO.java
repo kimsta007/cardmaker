@@ -29,11 +29,11 @@ public class CardMakerDAO {
         return recipientID;
 	}
 	
-	public ArrayList<HashMap<String, String>> createCard(String xOrient, String eType, String rName, String rEmail) throws Exception {
+	public ArrayList<HashMap<String, String>> createCard(String cOrient, String eType, String rName, String rEmail) throws Exception {
 		try {
 			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.card values(?,?,?,?)");
 			ps.setNull(1,0);
-			ps.setInt (2, Integer.parseInt(xOrient));
+			ps.setInt (2, Integer.parseInt(cOrient));
 			ps.setInt(3, Integer.parseInt(eType));
 			ps.setInt(4, getRecipientID(rName, rEmail));			
 			ps.execute();
@@ -42,6 +42,36 @@ public class CardMakerDAO {
 			throw new Exception("Failed to create card." + ex.getMessage());
 		}
 			return listAllCards();
+	}
+	
+	public int createDuplicateCard (String cOrient, String eType, String rName, String rEmail) throws Exception {
+		int recipientID = 0;
+		try {
+			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.card values(?,?,?,?)");
+			ps.setNull(1,0);
+			ps.setInt (2, Integer.parseInt(cOrient));
+			ps.setInt(3, Integer.parseInt(eType));
+			recipientID = getRecipientID(rName, rEmail);
+			ps.setInt(4, recipientID);			
+			ps.execute();
+			ps.close();
+		} catch (Exception ex) {
+			throw new Exception("Failed to create card." + ex.getMessage());
+		}
+		return getDuplicateCard(Integer.parseInt(cOrient), Integer.parseInt(eType), recipientID);
+	}
+	
+	public int getDuplicateCard(int cOrient, int eType, int recipientID) throws Exception {
+        int cardID = 0;
+		PreparedStatement ps = conn.prepareStatement("SELECT cardID FROM cs509db.card where cardOrientation = " + cOrient + " and"
+        		+ " eventTypeID = " + eType + " and recipientID = " + recipientID + ";");	    
+        ResultSet resultSet = ps.executeQuery();	
+        while (resultSet.next()) {
+        	cardID = resultSet.getInt("cardID");
+        }
+        resultSet.close();
+        ps.close();
+        return cardID;
 	}
 	
 	public String deleteCard(String cardID) throws Exception {
@@ -284,7 +314,7 @@ public class CardMakerDAO {
 			PreparedStatement ps = 
 				conn.prepareStatement("update cs509db.image set name = " + name + ", xOrient = "+ Integer.parseInt(xOrient) +
 						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
-						"where imageID = " + Integer.parseInt(imageID) + ";");
+						" where imageID = " + Integer.parseInt(imageID) + ";");
 				ps.execute();
 				ps.close();
 			return "Image updated.";
@@ -305,8 +335,71 @@ public class CardMakerDAO {
 		}
 	}
 	
-	//Note yet sure how to return that...
-	public void getCard(String cardID) {
-		
+	public String duplicateCard(String cardID, String eventTypeID, 
+		String cardOrientation, String recipientName, String recipientEmail) throws Exception {
+		try {
+			int duplicateCardID = this.createDuplicateCard(cardID, eventTypeID, recipientName, recipientEmail);
+			this.duplicateImages(duplicateCardID, Integer.parseInt(cardID));
+			this.duplicateText(duplicateCardID, Integer.parseInt(cardID));
+		} catch (Exception ex) {
+			throw new Exception("Failed to duplicate card." + ex.getMessage());
+		}
+		return null;
+	}
+	
+	public void duplicateImages(int cardID, int duplicateCardID) throws Exception {
+		try {
+		PreparedStatement ps = conn.prepareStatement("Select * from image where cardID = " + cardID + ";");	    
+        ResultSet resultSet = ps.executeQuery();	
+        while (resultSet.next()) {
+        	updateDuplicateImage(resultSet.getInt("imageID"), duplicateCardID);        	
+        }
+        resultSet.close();
+        ps.close();
+		} catch (Exception ex) {
+			throw new Exception("Failed to duplicate imageElement." + ex.getMessage());
+		}
+	}
+	
+	public void updateDuplicateImage(int imageID, int duplicateCardID) throws Exception {
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update cs509db.image set cardID = " + duplicateCardID + 
+						" where imageID = " + imageID + ";");
+				ps.execute();
+				ps.close();
+		} catch (Exception ex) {
+			throw new Exception("Failed to duplicate Image." + ex.getMessage());
+		}
+	}
+	
+	public void duplicateText(int cardID, int duplicateTextID) throws Exception {
+		try {
+			PreparedStatement ps = conn.prepareStatement("Select * from text where cardID = " + cardID + ";");	    
+	        ResultSet resultSet = ps.executeQuery();	
+	        while (resultSet.next()) {
+	        	updateDuplicateText(resultSet.getInt("textID"), cardID);        	
+	        }
+	        resultSet.close();
+	        ps.close();
+			} catch (Exception ex) {
+				throw new Exception("Failed to duplicate textElement." + ex.getMessage());
+			}
+	}
+	
+	public void updateDuplicateText(int textID, int duplicateCardID) throws Exception {
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update cs509db.text set cardID = " + duplicateCardID + 
+						" where textID = " + textID + ";");
+				ps.execute();
+				ps.close();
+		} catch (Exception ex) {
+			throw new Exception("Failed to duplicate Text." + ex.getMessage());
+		}
+	}
+	
+	public String getCard(String cardID, String recipientID) {
+	   return null;
 	}
 }

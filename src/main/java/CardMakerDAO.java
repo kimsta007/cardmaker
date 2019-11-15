@@ -215,10 +215,10 @@ public class CardMakerDAO {
         int elementID = 0;
 		try {
 		PreparedStatement ps = conn.prepareStatement(
-        		"Select textID from text where text = '" + text + "', xOrient = " + Integer.parseInt(xOrient) + ", yOrient = " + 
-        				Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
-        					", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + ", pageID = " + Integer.parseInt(pageID) + 
-        					", cardID = " + Integer.parseInt(cardID) + ";"
+        		"Select textID from text where text = '" + text + "' and xOrient = " + Integer.parseInt(xOrient) + " and yOrient = " + 
+        				Integer.parseInt(yOrient) + " and width = " + Integer.parseInt(width) + " and height = " + Integer.parseInt(height) + 
+        					", font = '" + font + "' and fontSize = " + Integer.parseInt(fontSize) + " and pageID = " + Integer.parseInt(pageID) + 
+        					" and cardID = " + Integer.parseInt(cardID) + ";"
         );	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {

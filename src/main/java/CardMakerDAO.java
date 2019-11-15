@@ -218,7 +218,7 @@ public class CardMakerDAO {
         		"Select textID from text where text = '" + text + "' and xOrient = " + Integer.parseInt(xOrient) + " and yOrient = " + 
         				Integer.parseInt(yOrient) + " and width = " + Integer.parseInt(width) + " and height = " + Integer.parseInt(height) + 
         					", font = '" + font + "' and fontSize = " + Integer.parseInt(fontSize) + " and pageID = " + Integer.parseInt(pageID) + 
-        					" and cardID = " + Integer.parseInt(cardID) + ";"
+        					" and cardID = " + Integer.parseInt(cardID) + " order by textID desc limit 1;"
         );	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {

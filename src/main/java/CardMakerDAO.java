@@ -217,7 +217,7 @@ public class CardMakerDAO {
 		PreparedStatement ps = conn.prepareStatement(
         		"Select textID from text where text = '" + text + "' and xOrient = " + Integer.parseInt(xOrient) + " and yOrient = " + 
         				Integer.parseInt(yOrient) + " and width = " + Integer.parseInt(width) + " and height = " + Integer.parseInt(height) + 
-        					", font = '" + font + "' and fontSize = " + Integer.parseInt(fontSize) + " and pageID = " + Integer.parseInt(pageID) + 
+        					" and font = '" + font + "' and fontSize = " + Integer.parseInt(fontSize) + " and pageID = " + Integer.parseInt(pageID) + 
         					" and cardID = " + Integer.parseInt(cardID) + " order by textID desc limit 1;"
         );	    
         ResultSet resultSet = ps.executeQuery();	
@@ -269,12 +269,12 @@ public class CardMakerDAO {
 			String textID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.text set text = " + text + ", xOrient = "+ Integer.parseInt(xOrient) +
+				conn.prepareStatement("update text set text = '" + text + "', xOrient = "+ Integer.parseInt(xOrient) +
 						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
-						", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + "where textID = " + Integer.parseInt(textID) + ";");
+						", font = '" + font + "', fontSize = " + Integer.parseInt(fontSize) + " where textID = " + Integer.parseInt(textID) + ";");
 				ps.execute();
 				ps.close();
-			return "Text updated.";
+			return "Text Element Updated.";
 		} catch (Exception ex) {
 			throw new Exception("Failed to update Text." + ex.getMessage());
 		}

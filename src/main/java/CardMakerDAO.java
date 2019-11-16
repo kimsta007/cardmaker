@@ -167,7 +167,7 @@ public class CardMakerDAO {
 	public String updateRecipient(String rName, String rSurname, String rEmail, String recipientID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.recipient set recipientName = '" + rName + "', recipientSurname = '"+ rSurname +
+				conn.prepareStatement("update recipient set recipientName = '" + rName + "', recipientSurname = '"+ rSurname +
 						"', recipientEmail = '" + rEmail + "' where recipientID = " + Integer.parseInt(recipientID) + ";");
 				ps.execute();
 				ps.close();
@@ -181,7 +181,7 @@ public class CardMakerDAO {
 			String pageID, String cardID) throws Exception {
 		HashMap<String, String> textMap = new HashMap<String, String>();
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into text values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setString (2, text);
 			ps.setInt(3, Integer.parseInt(xOrient));
@@ -256,7 +256,7 @@ public class CardMakerDAO {
 	public String deleteTextElement(String textID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.text where textID = " + Integer.parseInt(textID) + ";");
+				conn.prepareStatement("delete from text where textID = " + Integer.parseInt(textID) + ";");
 				ps.execute();
 				ps.close();
 			return "Text deleted.";
@@ -284,7 +284,7 @@ public class CardMakerDAO {
 	throws Exception {
 		HashMap<String, String> imageMap = new HashMap<String, String>();
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.text values(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into image values(?,?,?,?,?,?,?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setString (2, name);
 			ps.setInt(3, Integer.parseInt(xOrient));
@@ -298,6 +298,8 @@ public class CardMakerDAO {
 		} catch (Exception ex) {
 			throw new Exception("Failed to create Image Element." + ex.getMessage());
 		}
+		//Will not necessarily work like this is we store the image in S3 we probably need to be routing it to S3 and sending
+		//back a base64 string not sure what will be returned yet
 		imageMap.put("name", name);
 		imageMap.put("xOrient", xOrient);
 		imageMap.put("yOrient", yOrient);
@@ -312,7 +314,7 @@ public class CardMakerDAO {
 	public String updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.image set name = " + name + ", xOrient = "+ Integer.parseInt(xOrient) +
+				conn.prepareStatement("update image set name = " + name + ", xOrient = "+ Integer.parseInt(xOrient) +
 						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
 						" where imageID = " + Integer.parseInt(imageID) + ";");
 				ps.execute();
@@ -326,7 +328,7 @@ public class CardMakerDAO {
 	public String deleteImageElement(String imageID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.image where imageID = " + Integer.parseInt(imageID) + ";");
+				conn.prepareStatement("delete from image where imageID = " + Integer.parseInt(imageID) + ";");
 				ps.execute();
 				ps.close();
 			return "Image deleted.";
@@ -335,16 +337,18 @@ public class CardMakerDAO {
 		}
 	}
 	
-	public String duplicateCard(String cardID, String eventTypeID, 
+	public ArrayList<HashMap<String, String>> duplicateCard(String cardID, String eventTypeID, 
 		String cardOrientation, String recipientName, String recipientEmail) throws Exception {
+		int duplicateCardID = 0;
 		try {
-			int duplicateCardID = this.createDuplicateCard(cardID, eventTypeID, recipientName, recipientEmail);
-			this.duplicateImages(duplicateCardID, Integer.parseInt(cardID));
-			this.duplicateText(duplicateCardID, Integer.parseInt(cardID));
+			duplicateCardID = this.createDuplicateCard(cardOrientation, eventTypeID, recipientName, recipientEmail);
+			
 		} catch (Exception ex) {
 			throw new Exception("Failed to duplicate card." + ex.getMessage());
 		}
-		return "Card Duplicated."; 
+		this.duplicateImages(Integer.parseInt(cardID), duplicateCardID);
+		this.duplicateText(Integer.parseInt(cardID), duplicateCardID);
+		return listAllCards(); 
 	}
 	
 	public void duplicateImages(int cardID, int duplicateCardID) throws Exception {
@@ -378,25 +382,15 @@ public class CardMakerDAO {
 			PreparedStatement ps = conn.prepareStatement("Select * from text where cardID = " + cardID + ";");	    
 	        ResultSet resultSet = ps.executeQuery();	
 	        while (resultSet.next()) {
-	        	updateDuplicateText(resultSet.getInt("textID"), duplicateCardID);        	
+	    	    addTextElement(resultSet.getString("text"), resultSet.getString("xOrient"), resultSet.getString("yOrient"), 
+	    	    		resultSet.getString("width"), resultSet.getString("height"), resultSet.getString("font"), resultSet.getString("fontSize"), 
+	    	    			resultSet.getString("pageID"), String.valueOf(duplicateCardID));  
 	        }
 	        resultSet.close();
 	        ps.close();
 			} catch (Exception ex) {
 				throw new Exception("Failed to duplicate textElement." + ex.getMessage());
 			}
-	}
-	
-	public void updateDuplicateText(int textID, int duplicateCardID) throws Exception {
-		try {
-			PreparedStatement ps = 
-				conn.prepareStatement("update text set cardID = " + duplicateCardID + 
-						" where textID = " + textID + ";");
-				ps.execute();
-				ps.close();
-		} catch (Exception ex) {
-			throw new Exception("Failed to duplicate Text." + ex.getMessage());
-		}
 	}
 	
 	public String getCard(String cardID, String recipientID) {

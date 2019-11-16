@@ -47,7 +47,7 @@ public class CardMakerDAO {
 	public int createDuplicateCard (String cOrient, String eType, String rName, String rEmail) throws Exception {
 		int recipientID = 0;
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.card values(?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into card values(?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setInt (2, Integer.parseInt(cOrient));
 			ps.setInt(3, Integer.parseInt(eType));
@@ -56,15 +56,15 @@ public class CardMakerDAO {
 			ps.execute();
 			ps.close();
 		} catch (Exception ex) {
-			throw new Exception("Failed to create card." + ex.getMessage());
+			throw new Exception("Failed to create card duplicate." + ex.getMessage());
 		}
 		return getDuplicateCard(Integer.parseInt(cOrient), Integer.parseInt(eType), recipientID);
 	}
 	
 	public int getDuplicateCard(int cOrient, int eType, int recipientID) throws Exception {
         int cardID = 0;
-		PreparedStatement ps = conn.prepareStatement("SELECT cardID FROM cs509db.card where cardOrientation = " + cOrient + " and"
-        		+ " eventTypeID = " + eType + " and recipientID = " + recipientID + ";");	    
+		PreparedStatement ps = conn.prepareStatement("SELECT cardID FROM card where cardOrientation = " + cOrient + " and"
+        		+ " eventTypeID = " + eType + " and recipientID = " + recipientID + " order by cardID desc limit 1;");	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {
         	cardID = resultSet.getInt("cardID");
@@ -154,7 +154,7 @@ public class CardMakerDAO {
 	public String deleteRecipient(String recipientID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.recipient where recipientID = " + Integer.parseInt(recipientID) + ";");
+				conn.prepareStatement("delete from recipient where recipientID = " + Integer.parseInt(recipientID) + ";");
 				ps.execute();
 				ps.close();
 			return "Recipient deleted.";
@@ -344,7 +344,7 @@ public class CardMakerDAO {
 		} catch (Exception ex) {
 			throw new Exception("Failed to duplicate card." + ex.getMessage());
 		}
-		return null;
+		return "Card Duplicated."; 
 	}
 	
 	public void duplicateImages(int cardID, int duplicateCardID) throws Exception {
@@ -364,7 +364,7 @@ public class CardMakerDAO {
 	public void updateDuplicateImage(int imageID, int duplicateCardID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.image set cardID = " + duplicateCardID + 
+				conn.prepareStatement("update image set cardID = " + duplicateCardID + 
 						" where imageID = " + imageID + ";");
 				ps.execute();
 				ps.close();
@@ -373,12 +373,12 @@ public class CardMakerDAO {
 		}
 	}
 	
-	public void duplicateText(int cardID, int duplicateTextID) throws Exception {
+	public void duplicateText(int cardID, int duplicateCardID) throws Exception {
 		try {
 			PreparedStatement ps = conn.prepareStatement("Select * from text where cardID = " + cardID + ";");	    
 	        ResultSet resultSet = ps.executeQuery();	
 	        while (resultSet.next()) {
-	        	updateDuplicateText(resultSet.getInt("textID"), cardID);        	
+	        	updateDuplicateText(resultSet.getInt("textID"), duplicateCardID);        	
 	        }
 	        resultSet.close();
 	        ps.close();
@@ -390,7 +390,7 @@ public class CardMakerDAO {
 	public void updateDuplicateText(int textID, int duplicateCardID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update cs509db.text set cardID = " + duplicateCardID + 
+				conn.prepareStatement("update text set cardID = " + duplicateCardID + 
 						" where textID = " + textID + ";");
 				ps.execute();
 				ps.close();

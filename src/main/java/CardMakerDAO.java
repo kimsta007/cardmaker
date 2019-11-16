@@ -284,7 +284,7 @@ public class CardMakerDAO {
 	throws Exception {
 		HashMap<String, String> imageMap = new HashMap<String, String>();
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into image values(?,?,?,?,?,?,?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into image values(?,?,?,?,?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setString (2, name);
 			ps.setInt(3, Integer.parseInt(xOrient));

@@ -77,7 +77,7 @@ public class CardMakerDAO {
 	public String deleteCard(String cardID) throws Exception {
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("delete from cs509db.card where recipientID = " + Integer.parseInt(cardID) + ";");
+				conn.prepareStatement("delete from card where cardID = " + Integer.parseInt(cardID) + ";");
 				ps.execute();
 				ps.close();
 			return "Card deleted.";

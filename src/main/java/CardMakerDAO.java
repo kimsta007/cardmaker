@@ -237,9 +237,9 @@ public class CardMakerDAO {
         int elementID = 0;
 		try {
 		PreparedStatement ps = conn.prepareStatement(
-        		"Select imageID from image where name = '" + name + "', xOrient = " + Integer.parseInt(xOrient) + ", yOrient = " + 
-        				Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
-        				 ", pageID = " + Integer.parseInt(pageID) + ", cardID = " + Integer.parseInt(cardID) + ";"
+        		"Select imageID from image where name = '" + name + "' and xOrient = " + Integer.parseInt(xOrient) + " and yOrient = " + 
+        				Integer.parseInt(yOrient) + " and width = " + Integer.parseInt(width) + " and height = " + Integer.parseInt(height) + 
+        				 " and pageID = " + Integer.parseInt(pageID) + " and cardID = " + Integer.parseInt(cardID) + " order by imageID desc limit 1;"
         );	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {
@@ -314,7 +314,7 @@ public class CardMakerDAO {
 	public String updateImageElement(String name, String xOrient, String yOrient, String width, String height, String imageID) throws Exception{
 		try {
 			PreparedStatement ps = 
-				conn.prepareStatement("update image set name = " + name + ", xOrient = "+ Integer.parseInt(xOrient) +
+				conn.prepareStatement("update image set name = '" + name + "', xOrient = "+ Integer.parseInt(xOrient) +
 						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
 						" where imageID = " + Integer.parseInt(imageID) + ";");
 				ps.execute();
@@ -356,24 +356,14 @@ public class CardMakerDAO {
 		PreparedStatement ps = conn.prepareStatement("Select * from image where cardID = " + cardID + ";");	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {
-        	updateDuplicateImage(resultSet.getInt("imageID"), duplicateCardID);        	
+        	 addImageElement(resultSet.getString("name"), resultSet.getString("xOrient"), resultSet.getString("yOrient"), 
+	    	    		resultSet.getString("width"), resultSet.getString("height"), 
+	    	    			resultSet.getString("pageID"), String.valueOf(duplicateCardID));  
         }
         resultSet.close();
         ps.close();
 		} catch (Exception ex) {
 			throw new Exception("Failed to duplicate imageElement." + ex.getMessage());
-		}
-	}
-	
-	public void updateDuplicateImage(int imageID, int duplicateCardID) throws Exception {
-		try {
-			PreparedStatement ps = 
-				conn.prepareStatement("update image set cardID = " + duplicateCardID + 
-						" where imageID = " + imageID + ";");
-				ps.execute();
-				ps.close();
-		} catch (Exception ex) {
-			throw new Exception("Failed to duplicate Image." + ex.getMessage());
 		}
 	}
 	

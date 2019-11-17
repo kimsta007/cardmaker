@@ -39,7 +39,7 @@ public class AddImageElementHandler implements RequestStreamHandler {
 		}
 
 		try {
-			String src = parsedValues.get("src");
+			String src = parsedValues.get("imageName");
 			String xOrient = parsedValues.get("xOrient");
 			String yOrient = parsedValues.get("yOrient");
 			String width = parsedValues.get("width");

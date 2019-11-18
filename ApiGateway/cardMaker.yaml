@@ -62,7 +62,7 @@ paths:
           description: 'Card Deletion Failed'
 
   /getCard:
-    get:
+    post:
       tags:
       - card
       summary: Get a given card

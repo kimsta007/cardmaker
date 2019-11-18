@@ -383,7 +383,87 @@ public class CardMakerDAO {
 			}
 	}
 	
-	public String getCard(String cardID, String recipientID) {
-	   return null;
+	public ArrayList<HashMap<String, String>> getTextElements(int cardID) throws Exception {
+		ArrayList<HashMap<String, String>> textElements = new ArrayList<HashMap<String, String>>();
+		try {
+			PreparedStatement ps = conn.prepareStatement("Select * from text where cardID = " + cardID + ";");	    
+	        ResultSet resultSet = ps.executeQuery();	
+	        while (resultSet.next()) {
+	        	HashMap<String, String> textMap = new HashMap<String, String>();	        	
+	        	textMap.put("text", resultSet.getString("text"));
+	    		textMap.put("xOrient", resultSet.getString("xOrient"));
+	    		textMap.put("yOrient", resultSet.getString("yOrient"));
+	    		textMap.put("width", resultSet.getString("width"));
+	    		textMap.put("height", resultSet.getString("height"));
+	    		textMap.put("font", resultSet.getString("font"));
+	    		textMap.put("fontSize", resultSet.getString("fontSize"));
+	    		textMap.put("pageID", resultSet.getString("pageID"));
+	    		textMap.put("cardID", resultSet.getString("cardID"));  
+	    		textMap.put("textID", resultSet.getString("textID"));  	        
+	    	    textElements.add(textMap);
+	        }
+	        resultSet.close();
+	        ps.close();
+	        return textElements;
+			} catch (Exception ex) {
+				throw new Exception("Failed to retrieve textElements." + ex.getMessage());
+			}
+	}
+	
+	public ArrayList<HashMap<String, String>> getImageElements(int cardID) throws Exception {
+		ArrayList<HashMap<String, String>> imageElements = new ArrayList<HashMap<String, String>>();
+		try {
+			PreparedStatement ps = conn.prepareStatement("Select * from image where cardID = " + cardID + ";");	    
+	        ResultSet resultSet = ps.executeQuery();	
+	        while (resultSet.next()) {
+	        	HashMap<String, String> textMap = new HashMap<String, String>();	        	
+	        	textMap.put("text", resultSet.getString("name"));
+	    		textMap.put("xOrient", resultSet.getString("xOrient"));
+	    		textMap.put("yOrient", resultSet.getString("yOrient"));
+	    		textMap.put("width", resultSet.getString("width"));
+	    		textMap.put("height", resultSet.getString("height"));
+	    		textMap.put("pageID", resultSet.getString("pageID"));
+	    		textMap.put("cardID", resultSet.getString("cardID"));  
+	    		textMap.put("textID", resultSet.getString("imageID"));  	        
+	    	    imageElements.add(textMap);
+	        }
+	        resultSet.close();
+	        ps.close();
+	        return imageElements;
+			} catch (Exception ex) {
+				throw new Exception("Failed to retrieve textElements." + ex.getMessage());
+			}
+	}
+	
+	public ArrayList<HashMap<String, String>> getCardDetails(int cardID) throws Exception {
+		ArrayList<HashMap<String, String>> card = new ArrayList<HashMap<String, String>>();
+		try {
+			PreparedStatement ps = conn.prepareStatement("Select * from card where cardID = " + cardID + ";");	    
+	        ResultSet resultSet = ps.executeQuery();
+			 ResultSetMetaData rsMetaData = resultSet.getMetaData();
+	        while (resultSet.next()) {
+            	HashMap<String, String> resultsMap = new HashMap<String,String>();
+            	resultsMap.put(rsMetaData.getColumnName(1), resultSet.getString("cardID"));
+            	resultsMap.put(rsMetaData.getColumnName(2), resultSet.getString("cardOrientation"));
+            	resultsMap.put(rsMetaData.getColumnName(3), resultSet.getString("event"));	
+            	resultsMap.put(rsMetaData.getColumnName(4), resultSet.getString("recipientName"));
+            	resultsMap.put(rsMetaData.getColumnName(5), resultSet.getString("recipientSurname"));	
+            	resultsMap.put(rsMetaData.getColumnName(6), resultSet.getString("recipientEmail"));
+            	card.add(resultsMap);
+	        }
+	        resultSet.close();
+	        ps.close();
+	        return card;
+			} catch (Exception ex) {
+				throw new Exception("Failed to duplicate textElement." + ex.getMessage());
+			}
+	}
+	
+	public ArrayList<ArrayList<HashMap<String, String>>> getCard(String cardID) throws Exception {
+		ArrayList<ArrayList<HashMap<String, String>>> card = new ArrayList<ArrayList<HashMap<String, String>>>();
+		card.add(getCardDetails(Integer.parseInt(cardID)));		
+		card.add(getTextElements(Integer.parseInt(cardID)));
+		card.add(getImageElements(Integer.parseInt(cardID)));
+		return card;   
 	}
 }

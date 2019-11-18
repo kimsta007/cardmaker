@@ -1,10 +1,12 @@
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\DBUtils.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\UpdateTextElementHandler.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\DuplicateCardHandler.java
+C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\GetCardHandler.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\UpdateImageElementHandler.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\DeleteTextElementHandler.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\ParseJSON.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\AddTextElementHandler.java
+C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\imageParser.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\JSONUtils.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\AddImageElementHandler.java
 C:\Users\Akim\eclipse-workspace\awslambda\src\main\java\CardMakerDAO.java

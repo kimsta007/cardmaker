@@ -1,0 +1,288 @@
+swagger: '2.0'
+info:
+  description: CardMaker Pro Ops API 
+  version: 1.0.0
+  title: Performs Basic Card Operations
+  contact:
+    email: proakim@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# host: 
+# basePath: /v2
+
+# schemes:
+# - http
+paths:
+  /addTextElement:
+    post:
+      tags:
+      - textElement
+      summary: Add Text Element
+      description: Create text Element.
+      operationId: addTextElement
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: addText
+        description: create page text element
+        schema:
+          $ref: '#/definitions/addTextElement'
+      responses:
+        '200': 
+          description: 'Text Element Created'
+        '400':
+          description: 'creation of Text Element Failed'
+
+  /updateTextElement:
+    post:
+      tags:
+      - textElement
+      summary: Update text Element
+      operationId: updateTextElement
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: modifyText
+        description: Update Text Element
+        schema:
+            $ref: '#/definitions/updateTextElement'
+      responses:
+        '200': 
+          description: 'Text Element Changed'
+        '400':
+          description: 'Failed to Change Text Element'
+          
+  /deleteTextElement:
+    post:
+      tags:
+      - textElement
+      summary: Delete text Element
+      operationId: deleteTextElement
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: deleteText
+        description: Delete Text Element
+        schema:
+            $ref: '#/definitions/deleteTextElement'
+      responses:
+        '200': 
+          description: 'Text Element Deleted'
+        '400':
+          description: 'Failed to Delete Text Element'        
+          
+          
+  /addImageElement:
+    post:
+      tags:
+      - imageElement
+      summary: Add Image Element
+      operationId: addImageElement
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: createImage
+        description: Add Image on Card Page
+        schema:
+            $ref: '#/definitions/addImageElement'
+      responses:
+        '200': 
+          description: 'Image added'
+        '400':
+          description: 'Failed to add Image'
+          
+  /updateImageElement:
+    post:
+      tags:
+      - imageElement
+      summary: Update Image Element
+      operationId: updateImageElementX
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: updateImage
+        description: Update Image Element
+        schema:
+            $ref: '#/definitions/updateImageElement'
+      responses:
+        '200': 
+          description: 'Image Element Changed'
+        '400':
+          description: 'Failed to Change Image Element'
+  
+  /deleteImageElement:
+    post:
+      tags:
+      - imageElement
+      summary: Delete Image Element
+      operationId: deleteImageElement
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: deleteImage
+        description: Delete Image Element
+        schema:
+            $ref: '#/definitions/deleteImageElement'
+      responses:
+        '200': 
+          description: 'Image Element Deleted'
+        '400':
+          description: 'Failed to Delete Image Element'
+  
+  /listImageElements:
+    get:
+      tags:
+      - imageElement
+      summary: List Image Elements in S3
+      operationId: listImageElements
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        '200': 
+          description: 'OK'
+        '400':
+          description: 'Failed to Retrieve Image Elements'
+
+definitions:
+  addTextElement:
+    type: object
+    properties:
+      text:
+        type: string
+      xOrient:
+        type: integer
+        format: int32
+      yOrient:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+      height:
+        type: integer
+        format: int32
+      font:
+        type: string
+      fontSize:
+        type: integer
+        format: int32
+      pageID:
+        type: integer
+        format: int32
+      cardID:
+        type: integer
+        format: int32
+        
+  updateTextElement:
+    type: object
+    properties:
+      text:
+        type: string
+      xOrient:
+        type: integer
+        format: int32
+      yOrient:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+      height:
+        type: integer
+        format: int32
+      font:
+        type: string
+      fontSize:
+        type: integer
+        format: int32
+      textID:
+        type: integer
+        format: int32
+
+  deleteTextElement:
+    type: object
+    properties:
+      textID:
+        type: integer
+        format: int32
+  
+  addImageElement:
+    type: object
+    properties:
+      imageName:
+        type: string
+      xOrient:
+        type: integer
+        format: int32
+      yOrient:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+      height:
+        type: integer
+        format: int32
+      pageID:
+        type: integer
+        format: int32
+      cardID:
+        type: integer
+        format: int32
+
+   updateImageElement:
+    type: object
+    properties:
+      imageName:
+        type: string
+      xOrient:
+        type: integer
+        format: int32
+      yOrient:
+        type: integer
+        format: int32
+      width:
+        type: integer
+        format: int32
+      height:
+        type: integer
+        format: int32
+      imageID:
+        type: integer
+        format: int32
+        
+   deleteImageElement:
+    type: object
+    properties:
+      imageID:
+        type: integer
+        format: int32
+        
+# basePath: /kimsta007/ptst/1.0.0
+schemes:
+ - https
+ - http
+# Added by API Auto Mocking Plugin
+host: virtserver.swaggerhub.com
+basePath: /kimsta007/cardOps/1.0.0

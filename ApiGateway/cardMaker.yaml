@@ -1,0 +1,171 @@
+swagger: '2.0'
+info:
+  description: CardMaker Pro API 
+  version: 1.0.0
+  title: CardMaker Pro API
+  contact:
+    email: proakim@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+# host: 
+# basePath: /v2
+
+# schemes:
+# - http
+paths:
+  /createCard:
+    post:
+      tags:
+      - card
+      summary: Create Cards
+      description: Create User Card.
+      operationId: createCard
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: cardCreate
+        description: Create Card Instance
+        required: true
+        schema:
+          $ref: '#/definitions/cardCreate'
+      responses:
+        '200': 
+          description: 'Card Created'
+        '400':
+          description: 'Card Creation Failed'
+
+  /deleteCard:
+    post:
+      tags:
+      - card
+      summary: Delete a given card
+      operationId: deleteCard
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: cardDelete
+        description: Delete Card Instance
+        required: true
+        schema:
+            $ref: '#/definitions/cardDelete'
+      responses:
+        '200': 
+          description: 'Card Deleted'
+        '400':
+          description: 'Card Deletion Failed'
+
+  /getCard:
+    get:
+      tags:
+      - card
+      summary: Get a given card
+      operationId: getCard
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: getCard
+        description: Delete Card Instance
+        required: true
+        schema:
+            $ref: '#/definitions/cardDelete'
+      responses:
+        '200': 
+          description: 'Card Found'
+        '400':
+          description: 'Card Not Found'
+  
+          
+  /duplicateCard:
+    post:
+      tags:
+      - card
+      summary: Duplicate existing card
+      operationId: duplicateCard
+      consumes:
+      - application/json
+      produces: 
+      - application/json
+      parameters:
+      - in: body
+        name: cardDuplicate
+        description: Duplicate Card Instance
+        required: true
+        schema:
+            $ref: '#/definitions/cardDuplicate'
+      responses:
+        '200': 
+          description: 'Card Duplicated'
+        '400':
+          description: 'Card Duplication Failed'
+          
+  /displayCards:
+    get:
+      tags:
+      - card
+      summary: Display all cards
+      operationId: diaplayCards
+      produces:
+      - application/json
+    
+      responses:
+        '200':
+          description: 'Cards Listed'
+        '400':
+          description: 'Failed to fetch cards'
+  
+definitions:
+  cardCreate:
+    type: object
+    properties:
+      cardOrientation:
+        type: integer
+        format: int32
+      eventType:
+        type: integer
+        format: int32
+      firstName:
+        type: string
+      lastName:
+        type: string
+      emailAddress:
+        type: string
+        format: email
+        
+  cardDelete:
+    type: object
+    properties:
+      cardID:
+        type: integer
+        format: int32
+        
+  cardDuplicate:
+    type: object
+    properties:
+      cardID:
+        type: integer
+        format: int32  
+      eventType:
+        type: integer
+        format: int32
+      firstName:
+        type: string
+      emailAddress:
+        type: string
+      cardOrientation:
+        type: integer
+        format: int32
+
+basePath: /kimsta007/ptst/1.0.0
+schemes:
+ - https
+ - http

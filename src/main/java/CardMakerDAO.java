@@ -417,28 +417,31 @@ public class CardMakerDAO {
 	        ResultSet resultSet = ps.executeQuery();	
 	        while (resultSet.next()) {
 	        	HashMap<String, String> textMap = new HashMap<String, String>();	        	
-	        	textMap.put("text", resultSet.getString("name"));
+	        	textMap.put("src", resultSet.getString("name"));
 	    		textMap.put("xOrient", resultSet.getString("xOrient"));
 	    		textMap.put("yOrient", resultSet.getString("yOrient"));
 	    		textMap.put("width", resultSet.getString("width"));
 	    		textMap.put("height", resultSet.getString("height"));
 	    		textMap.put("pageID", resultSet.getString("pageID"));
 	    		textMap.put("cardID", resultSet.getString("cardID"));  
-	    		textMap.put("textID", resultSet.getString("imageID"));  	        
+	    		textMap.put("imageID", resultSet.getString("imageID"));  	        
 	    	    imageElements.add(textMap);
 	        }
 	        resultSet.close();
 	        ps.close();
 	        return imageElements;
 			} catch (Exception ex) {
-				throw new Exception("Failed to retrieve textElements." + ex.getMessage());
+				throw new Exception("Failed to image textElements." + ex.getMessage());
 			}
 	}
 	
 	public ArrayList<HashMap<String, String>> getCardDetails(int cardID) throws Exception {
 		ArrayList<HashMap<String, String>> card = new ArrayList<HashMap<String, String>>();
 		try {
-			PreparedStatement ps = conn.prepareStatement("Select * from card where cardID = " + cardID + ";");	    
+			PreparedStatement ps = conn.prepareStatement("Select cardID, cardOrientation, event, recipientName, " +
+					"recipientSurname, recipientEmail from card " + 
+					"inner join event on card.eventTypeID = event.eventTypeID " + 
+					"inner join recipient on card.recipientID = recipient.recipientID where cardID = " + cardID + ";");	    
 	        ResultSet resultSet = ps.executeQuery();
 			 ResultSetMetaData rsMetaData = resultSet.getMetaData();
 	        while (resultSet.next()) {
@@ -455,7 +458,7 @@ public class CardMakerDAO {
 	        ps.close();
 	        return card;
 			} catch (Exception ex) {
-				throw new Exception("Failed to duplicate textElement." + ex.getMessage());
+				throw new Exception("Failed to locate Card." + ex.getMessage());
 			}
 	}
 	

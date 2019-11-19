@@ -11,6 +11,10 @@ public class ParseJSON {
 	JSONParser parser;
 	JSONObject jsonString;
 	
+	public int addTwoNums() {
+		return 5 + 5;
+	}
+	
 	public Map<String, String> jsonParser(InputStream stream) throws Exception {
 			reader = new BufferedReader(new InputStreamReader(stream));
 			parser = new JSONParser();

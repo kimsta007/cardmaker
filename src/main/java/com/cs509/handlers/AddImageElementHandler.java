@@ -26,11 +26,7 @@ public class AddImageElementHandler implements RequestStreamHandler {
 		dao = new CardMakerDAO();
 		myUtils = new JSONUtils();
 	}
-	
-	public int addTwoNums() {
-		return 5 + 5;
-	}
-	
+
 	@SuppressWarnings("unchecked")
 	public void formatResponse(String jsonString, int statusCode) {
         myUtils.getResponseJson().put("body", jsonString);  

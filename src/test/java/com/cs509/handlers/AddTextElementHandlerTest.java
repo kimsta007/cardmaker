@@ -7,8 +7,9 @@ import org.junit.Test;
 public class AddTextElementHandlerTest {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testAddTwoNumbers() {
+		AddTextElementHandler handler = new AddTextElementHandler();
+		assertEquals(10, handler.addTwoNums());
 	}
 
 }

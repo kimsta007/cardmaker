@@ -19,6 +19,10 @@ public class CardMakerDAO {
     	}
 	}
 	
+	public int addTwoNums() {
+		return 5 + 5;
+	}
+	
 	public int getRecipientID(String rName, String rEmail) throws Exception {
         int recipientID = 0;
 		PreparedStatement ps = conn.prepareStatement("SELECT recipientID FROM cs509db.recipient where recipientName = '" + rName + "' and"

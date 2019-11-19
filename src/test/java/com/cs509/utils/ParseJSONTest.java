@@ -8,8 +8,7 @@ public class ParseJSONTest {
 
 	@Test
 	public void test() {
-		ParseJSON parseJson = new ParseJSON();
-		assertEquals(10, parseJson.addTwoNums());
+
 	}
 
 }

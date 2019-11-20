@@ -12,7 +12,7 @@ import com.cs509.dao.CardMakerDAO;
 import com.cs509.utils.ImageParser;
 import com.cs509.utils.JSONUtils;
 import com.cs509.utils.ParseJSON;
-import com.cs509.utils.UploadFileToS3;
+import com.cs509.utils.S3Utils;
 import com.google.gson.Gson;
 
 public class AddImageElementHandler implements RequestStreamHandler {
@@ -44,7 +44,7 @@ public class AddImageElementHandler implements RequestStreamHandler {
 			this.formatResponse(new Gson().toJson("Unable to process input"), 422);		
 		}
 		ImageParser parser = new ImageParser();  
-		UploadFileToS3 uploader = new UploadFileToS3();
+		S3Utils uploader = new S3Utils();
 		
 		try {
 			String srcName = parsedValues.get("imageName");
@@ -55,8 +55,8 @@ public class AddImageElementHandler implements RequestStreamHandler {
 			String height = parsedValues.get("height");
 			String pageID = parsedValues.get("pageID");
 			String cardID = parsedValues.get("cardID");	    
-			this.formatResponse(new Gson().toJson(dao.addImageElement(srcName, xOrient, yOrient, width, height, pageID, cardID)), 200);
-		    uploader.uploadImage(srcName, srcName.split(".")[1], parser.decodeToImage(base64String, srcName));
+			String url = uploader.uploadImage(srcName, srcName.split(".")[1], parser.decodeToImage(base64String, srcName));
+			this.formatResponse(new Gson().toJson(dao.addImageElement(url, xOrient, yOrient, width, height, pageID, cardID)), 200);		    
 	    } catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

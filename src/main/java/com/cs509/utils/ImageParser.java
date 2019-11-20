@@ -26,19 +26,4 @@ public class ImageParser {
         }
         return renamedImage; //File to be uploaded to S3 bucket
     }
-	
-	//Mnnn need to think about you !
-	public String encodeToString(BufferedImage image, String type) {
-        String imageString = null;
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(image, type, outputStream);
-            byte[] imageBytes = outputStream.toByteArray();
-            imageString = new String(Base64.getEncoder().encode(imageBytes));
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return imageString; //Return String to Client
-    }
 }

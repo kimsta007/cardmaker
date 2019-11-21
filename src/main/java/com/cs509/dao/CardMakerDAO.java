@@ -472,4 +472,23 @@ public class CardMakerDAO {
 		card.add(getImageElements(Integer.parseInt(cardID)));
 		return card;   
 	}
+	
+	public HashMap<String, String> listS3Images() throws Exception {
+		 try {  
+	            HashMap<String, String> record = new HashMap<String, String>();
+	            PreparedStatement ps = conn.prepareStatement(
+	            "SELECT DISTINCT name as url, (@row_number:=@row_number + 1) AS rowNum from image,(SELECT @row_number:=0) AS x;"
+	            );	    
+	            ResultSet resultSet = ps.executeQuery();	
+	            while (resultSet.next()) {
+	            	int rowNum = resultSet.getInt("rowNum");
+	            	record.put(String.valueOf(rowNum),resultSet.getString("url"));
+	            }
+	            resultSet.close();
+	            ps.close();
+	            return record;
+	        } catch (Exception e) {
+	        	throw new Exception("Failed to list images in S3. " + e.getMessage());
+	        }
+	}
 }

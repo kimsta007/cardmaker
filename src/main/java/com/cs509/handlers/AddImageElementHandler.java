@@ -43,11 +43,10 @@ public class AddImageElementHandler implements RequestStreamHandler {
 		} catch (Exception pe) {
 			this.formatResponse(new Gson().toJson("Unable to process input"), 422);		
 		}
-		ImageParser parser = new ImageParser();  
-		S3Utils uploader = new S3Utils();
 		
+		ImageParser parser = new ImageParser();  
 		try {
-			String srcName = parsedValues.get("imageName");
+			String fileName = parsedValues.get("imageName");
 			String base64String = parsedValues.get("base64String");
 			String xOrient = parsedValues.get("xOrient");
 			String yOrient = parsedValues.get("yOrient");
@@ -55,7 +54,7 @@ public class AddImageElementHandler implements RequestStreamHandler {
 			String height = parsedValues.get("height");
 			String pageID = parsedValues.get("pageID");
 			String cardID = parsedValues.get("cardID");	    
-			String url = uploader.uploadImage(srcName, srcName.split(".")[1], parser.decodeToImage(base64String, srcName));
+			String url = new S3Utils().uploadImage(parser.decodeToImage(base64String), fileName);
 			this.formatResponse(new Gson().toJson(dao.addImageElement(url, xOrient, yOrient, width, height, pageID, cardID)), 200);		    
 	    } catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);

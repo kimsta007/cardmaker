@@ -12,10 +12,10 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 import org.junit.Test;
 
-public class AddTextElementHandlerTest {
+public class DeleteImageElementHandlerTest {
 	@Test
-	public void addTextTest() {
-		AddTextElementHandler handler = new AddTextElementHandler();
+	public void deleteImageTest() {
+		DeleteImageElementHandler handler = new DeleteImageElementHandler();
 		String initialString = "{}";
 		InputStream testInputStream = new ByteArrayInputStream(initialString.getBytes());
         OutputStream testOutputStream = new ByteArrayOutputStream();

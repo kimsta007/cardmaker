@@ -12,10 +12,10 @@ import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
 import org.junit.Test;
 
-public class AddTextElementHandlerTest {
+public class DuplicateCardHandlerTest {
 	@Test
-	public void addTextTest() {
-		AddTextElementHandler handler = new AddTextElementHandler();
+	public void duplicateCardTest() {
+		DuplicateCardHandler handler = new DuplicateCardHandler();
 		String initialString = "{}";
 		InputStream testInputStream = new ByteArrayInputStream(initialString.getBytes());
         OutputStream testOutputStream = new ByteArrayOutputStream();

@@ -1,5 +1,7 @@
 package com.cs509.handlers;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
@@ -16,6 +18,7 @@ public class ListCardsHandlerTest {
 	@Test
 	public void listAllCardsTest() {
 		ListCardsHandler handler = new ListCardsHandler();
+		assertNotNull(handler.dao.getDBConnection());
 		String initialString = "{}";
 		InputStream testInputStream = new ByteArrayInputStream(initialString.getBytes());
         OutputStream testOutputStream = new ByteArrayOutputStream();

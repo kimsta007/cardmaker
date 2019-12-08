@@ -14,14 +14,14 @@ import com.cs509.utils.JSONUtils;
 import com.cs509.utils.ParseJSON;
 import com.google.gson.Gson;
 
-public class UpdateImageElementHandler implements RequestStreamHandler {
+public class UpdateRecipientHandler implements RequestStreamHandler {
 
 	ParseJSON parserUtils;
 	Map<String, String> parsedValues;
 	CardMakerDAO dao;
 	JSONUtils myUtils;
 	
-	public UpdateImageElementHandler() {
+	public UpdateRecipientHandler() {
 		parserUtils = new ParseJSON();
 		parsedValues = new HashMap<String, String>();
 		dao = new CardMakerDAO();
@@ -44,13 +44,11 @@ public class UpdateImageElementHandler implements RequestStreamHandler {
 		}
 
 		try {
-			String src = parsedValues.get("imageName");
-			String xOrient = parsedValues.get("xOrient");
-			String yOrient = parsedValues.get("yOrient");
-			String width = parsedValues.get("width");
-			String height = parsedValues.get("height");
-			String imageID = parsedValues.get("imageID");
-			this.formatResponse(new Gson().toJson(dao.updateImageElement(src, xOrient, yOrient, width, height, imageID)), 200);
+			String rName = parsedValues.get("rName");
+			String rSurname = parsedValues.get("rSurname");
+			String rEmail = parsedValues.get("rEmail");
+			String recipientID = parsedValues.get("recipientID");
+			this.formatResponse(new Gson().toJson(dao.updateRecipient(rName, rSurname, rEmail, recipientID)), 200);
 		} catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

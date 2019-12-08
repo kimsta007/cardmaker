@@ -10,11 +10,11 @@ import com.cs509.dao.CardMakerDAO;
 import com.cs509.utils.JSONUtils;
 import com.google.gson.Gson;
 
-public class ListCardsHandler implements RequestStreamHandler {
+public class ListRecipientsHandler implements RequestStreamHandler {
 	CardMakerDAO dao;
 	JSONUtils myUtils;
 	
-	public ListCardsHandler() {
+	public ListRecipientsHandler() {
 		dao = new CardMakerDAO();
 		myUtils = new JSONUtils();
 	}
@@ -28,7 +28,7 @@ public class ListCardsHandler implements RequestStreamHandler {
 	@Override
 	public void handleRequest(InputStream input, OutputStream output, Context context) throws IOException {
 		try {
-			this.formatResponse(new Gson().toJson(dao.listAllCards()), 200);
+			this.formatResponse(new Gson().toJson(dao.listAllRecipients()), 200);
 		} catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

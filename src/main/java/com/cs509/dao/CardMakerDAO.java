@@ -1,5 +1,6 @@
 package com.cs509.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import com.cs509.utils.DBUtils;
 
 public class CardMakerDAO {
 	
-	java.sql.Connection conn;
+	Connection conn;
 	
 	public CardMakerDAO (){
 		try  {
@@ -17,6 +18,11 @@ public class CardMakerDAO {
     	} catch (Exception e) {
     		conn = null;
     	}
+	}
+	
+	public Connection getDBConnection()
+	{
+		return conn;
 	}
 	
 	public int getRecipientID(String rName, String rEmail) throws Exception {
@@ -139,7 +145,7 @@ public class CardMakerDAO {
 	        }
 	}
 	
-	public String addRecipient(String rName, String rSurname, String rEmail) throws Exception {
+	public ArrayList<HashMap<String, String>> addRecipient(String rName, String rSurname, String rEmail) throws Exception {
 		try {
 			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.recipient values(?,?,?,?)");
 			ps.setNull(1,0);
@@ -148,10 +154,10 @@ public class CardMakerDAO {
 			ps.setString(4, rEmail);			
 			ps.execute();
 			ps.close();
-			return "Recipient Added.";
 		} catch (Exception ex) {
 			throw new Exception("Failed to add recipient."	+ ex.getMessage());
 		}
+		return listAllRecipients();
 	}
 	
 	public String deleteRecipient(String recipientID) throws Exception{

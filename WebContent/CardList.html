@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Cards</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script type="text/javascript" src="CardList.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>	
+	<style>
+	.table thead th {	
+		text-align:center;
+		vertical-align:middle;
+		}
+	td {
+		text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>Card List</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<table class="table table-sm" id="cardlist">
+					<thead>
+						<tr>
+							<th scope="col">
+								<div class="dropdown">
+									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="recipientSelect">Recipient</button>
+									<div class="dropdown-menu" id="recipientList"></div>
+								</div>
+							</th>
+							<th scope="col">Email</th>
+							<th scope="col">
+								<div class="dropdown">
+									<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" id="eventSelect">Event</button>
+									<div class="dropdown-menu" id="eventList"></div>
+								</div>
+							</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody id="cardbody">
+					</tbody>
+				</table>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<button type="button" class="btn btn-info" id="listAllCards">Show All Cards</button>
+				</div>
+				<div class="form-group">
+					<label for="recipientName">Recipient Name</label>
+					<input type="text" class="form-control" id="newRecipientName" placeholder="Required">
+				</div>
+				<div class="form-group">
+					<label for="recipientEmail">Recipient Email</label>
+					<input type="email" class="form-control" id="newRecipientEmail" placeholder="Required">
+				</div>
+				<div class="form-group">
+					<div class="dropdown">
+						<button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" id="cardOrientation">Card Orientation</button>
+						<div class="dropdown-menu" id="newCardOrientation">
+							<a class="dropdown-item orientation-option" value="0">Landscape</a>
+							<a class="dropdown-item orientation-option" value="1">Portrait</a>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="dropdown">
+						<button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" id="eventType">Event Type</button>
+						<div class="dropdown-menu" id="newCardEvent">
+							<a class="dropdown-item event-option" value="1">Anniversary</a>
+							<a class="dropdown-item event-option" value="2">Back to School</a>
+							<a class="dropdown-item event-option" value="3">Baptism</a>
+							<a class="dropdown-item event-option" value="4">Christening</a>
+							<a class="dropdown-item event-option" value="5">Baby</a>
+							<a class="dropdown-item event-option" value="6">Bar/Bat Mitzvah</a>
+							<a class="dropdown-item event-option" value="7">Birthday</a>
+							<a class="dropdown-item event-option" value="8">Confirmation</a>
+							<a class="dropdown-item event-option" value="9">Congratulations</a>
+							<a class="dropdown-item event-option" value="10">Encouragement</a>
+							<a class="dropdown-item event-option" value="11">First Communion</a>
+							<a class="dropdown-item event-option" value="12">Get Well</a>
+							<a class="dropdown-item event-option" value="13">Graduation</a>
+							<a class="dropdown-item event-option" value="14">Retirement</a>
+							<a class="dropdown-item event-option" value="15">Sympathy</a>
+							<a class="dropdown-item event-option" value="16">Teacher Appreciation</a>
+							<a class="dropdown-item event-option" value="17">Thank You</a>
+							<a class="dropdown-item event-option" value="18">Wedding</a>
+						</div>
+					</div>
+				</div>
+				<button type="button" class="btn btn-outline-primary" id="createCard">Create a New Card</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

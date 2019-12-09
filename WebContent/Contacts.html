@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Recipients</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Contacts.js"></script>
+	<style>
+	th {	
+		text-align:center;
+		}
+	td {
+		text-align:center;
+		}
+	</style>
+</head>
+<body>
+	<div class="jumbotron text-center">
+		<h1>Recipient List</h1>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-8">
+				<table class="table table-sm" id="contactlist">
+					<thead>
+						<tr>
+							<th scope="col">Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody id="contactbody">
+					</tbody>
+				</table>
+			</div>
+			<div class="col-4">
+				<div class="form-group">
+					<button type="button" class="btn btn-info" id="redirectCards" onclick="window.open('CardList.html')">CardLists</button>
+				</div>
+				<div class="form-group">
+					<label for="recipientName">Recipient Name</label>
+					<input type="text" class="form-control" id="newContactName" placeholder="Required">
+				</div>
+				<div class="form-group">
+					<label for="recipientSurname">Recipient Surname</label>
+					<input type="text" class="form-control" id="newContactSurname" placeholder="Required">
+				</div>
+				<div class="form-group">
+					<label for="recipientEmail">Recipient Email</label>
+					<input type="email" class="form-control" id="newContactEmail" placeholder="Required">
+				</div>
+				<button type="button" class="btn btn-outline-primary" id="addContact">Add a New Recipient</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

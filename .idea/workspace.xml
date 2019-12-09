@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd9974ea-f7b1-447b-b299-796972818c94" name="Default Changelist" comment="" />
+    <list default="true" id="fd9974ea-f7b1-447b-b299-796972818c94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/cs509/utils/ParseJSON.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/cs509/utils/ParseJSON.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="1" />
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myElementSize" value="769" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Desktop/EmmaReport" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -15,6 +31,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -22,12 +41,24 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
   <component name="ProjectId" id="1Slr7KkOsR7Wtf2yVVjOASiaqdj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="coverage" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -46,34 +77,96 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="[Local] CardHandler" type="aws.lambda" factoryName="Local" temporary="true" nameIsGenerated="true">
-      <option name="credentialProviderId" value="profile:default" />
-      <option name="regionId" value="ap-southeast-2" />
-      <option name="environmentVariables">
-        <map />
-      </option>
-      <option name="handler" value="CardHandler" />
-      <option name="logicalFunctionName" />
-      <option name="memorySize" value="128" />
-      <option name="runtime" value="java8" />
-      <option name="templateFile" />
-      <option name="timeout" value="300" />
-      <option name="useTemplate" value="false" />
-      <option name="input" />
-      <option name="inputIsFile" value="false" />
-      <sam>
-        <option name="additionalBuildArgs" />
-        <option name="additionalLocalArgs" />
-        <option name="buildInContainer" value="false" />
-        <option name="dockerNetwork" />
-        <option name="skipImagePull" value="false" />
-      </sam>
-      <method v="2" />
+  <component name="RunManager" selected="JUnit.testUpdateTextElementHandler">
+    <configuration name="testGetCardHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="awslambda.com" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cs509.handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cs509.handlers" />
+      <option name="MAIN_CLASS_NAME" value="com.cs509.handlers.testGetCardHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
+    <configuration name="testListCardsHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="awslambda.com" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cs509.handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cs509.handlers" />
+      <option name="MAIN_CLASS_NAME" value="com.cs509.handlers.testListCardsHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testListImageElementsHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="awslambda.com" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cs509.handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cs509.handlers" />
+      <option name="MAIN_CLASS_NAME" value="com.cs509.handlers.testListImageElementsHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testUpdateImageElementHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="awslambda.com" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cs509.handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cs509.handlers" />
+      <option name="MAIN_CLASS_NAME" value="com.cs509.handlers.testUpdateImageElementHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testUpdateTextElementHandler" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="awslambda.com" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.cs509.handlers.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.cs509.handlers" />
+      <option name="MAIN_CLASS_NAME" value="com.cs509.handlers.testUpdateTextElementHandler" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.testGetCardHandler" />
+      <item itemvalue="JUnit.testListCardsHandler" />
+      <item itemvalue="JUnit.testListImageElementsHandler" />
+      <item itemvalue="JUnit.testUpdateImageElementHandler" />
+      <item itemvalue="JUnit.testUpdateTextElementHandler" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="AWS Lambda.[Local] CardHandler" />
+        <item itemvalue="JUnit.testUpdateTextElementHandler" />
+        <item itemvalue="JUnit.testUpdateImageElementHandler" />
+        <item itemvalue="JUnit.testListImageElementsHandler" />
+        <item itemvalue="JUnit.testListCardsHandler" />
+        <item itemvalue="JUnit.testGetCardHandler" />
       </list>
     </recent_temporary>
   </component>
@@ -87,7 +180,127 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1572148854801</updated>
+      <workItem from="1574974713911" duration="20475000" />
+      <workItem from="1575471454475" duration="210000" />
+      <workItem from="1575485068185" duration="986000" />
+      <workItem from="1575674286867" duration="43000" />
+      <workItem from="1575920429902" duration="162000" />
+      <workItem from="1575921837610" duration="878000" />
+      <workItem from="1575923516268" duration="122000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/cs509/dao/CardMakerDAO.java</url>
+          <line>38</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/cardmaker$testUpdateTextElementHandler.ic" NAME="testUpdateTextElementHandler Coverage Results" MODIFIED="1575923601171" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testAddImageElementHandler.ic" NAME="testAddImageElementHandler Coverage Results" MODIFIED="1575923548428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testCreateCardHandler_dataGen.ic" NAME="testCreateCardHandler.dataGen Coverage Results" MODIFIED="1575000182421" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteCardHandler_test.ic" NAME="testDeleteCardHandler.test Coverage Results" MODIFIED="1575070351757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testGetCardHandler.ic" NAME="testGetCardHandler Coverage Results" MODIFIED="1575923589762" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testUpdateImageElementHandler_test.ic" NAME="testUpdateImageElementHandler.test Coverage Results" MODIFIED="1575072572840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testUpdateImageElementHandler.ic" NAME="testUpdateImageElementHandler Coverage Results" MODIFIED="1575923597287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$ParseJSONTest.ic" NAME="ParseJSONTest Coverage Results" MODIFIED="1575922688480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.utils.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteTextElementHandler_test.ic" NAME="testDeleteTextElementHandler.test Coverage Results" MODIFIED="1575071170840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteImageElementHandler_test.ic" NAME="testDeleteImageElementHandler.test Coverage Results" MODIFIED="1575070706118" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testListCardsHandler_test.ic" NAME="testListCardsHandler.test Coverage Results" MODIFIED="1575072223045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testAddImageElementHandler_test.ic" NAME="testAddImageElementHandler.test Coverage Results" MODIFIED="1575071222690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testCreateCardHandler.ic" NAME="testCreateCardHandler Coverage Results" MODIFIED="1575923565895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteImageElementHandler.ic" NAME="testDeleteImageElementHandler Coverage Results" MODIFIED="1575923571331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testGetCardHandler_test.ic" NAME="testGetCardHandler.test Coverage Results" MODIFIED="1575072084929" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testUpdateTextElementHandler_test.ic" NAME="testUpdateTextElementHandler.test Coverage Results" MODIFIED="1575674311756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testCreateCardHandler_test.ic" NAME="testCreateCardHandler.test Coverage Results" MODIFIED="1575070089113" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testListImageElementsHandler_test.ic" NAME="testListImageElementsHandler.test Coverage Results" MODIFIED="1575072327732" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDuplicateCardHandler_test.ic" NAME="testDuplicateCardHandler.test Coverage Results" MODIFIED="1575071435551" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteTextElementHandler.ic" NAME="testDeleteTextElementHandler Coverage Results" MODIFIED="1575923573753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testAddTextElementHandler_test.ic" NAME="testAddTextElementHandler.test Coverage Results" MODIFIED="1575069383411" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDeleteCardHandler.ic" NAME="testDeleteCardHandler Coverage Results" MODIFIED="1575923568025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testListCardsHandler.ic" NAME="testListCardsHandler Coverage Results" MODIFIED="1575923592238" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$CardMakerDAOTest.ic" NAME="CardMakerDAOTest Coverage Results" MODIFIED="1575922677211" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.dao.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testDuplicateCardHandler.ic" NAME="testDuplicateCardHandler Coverage Results" MODIFIED="1575923580708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testAddTextElementHandler.ic" NAME="testAddTextElementHandler Coverage Results" MODIFIED="1575923561632" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/cardmaker$testListImageElementsHandler.ic" NAME="testListImageElementsHandler Coverage Results" MODIFIED="1575923594452" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.cs509.handlers.*</FILTER>
+    </SUITE>
   </component>
 </project>

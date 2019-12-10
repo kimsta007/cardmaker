@@ -51,7 +51,15 @@
 			<div class="col-4">
 				<div class="form-group">
 					<button type="button" class="btn btn-info" id="listAllCards">Show All Cards</button>
+					<button type="button" class="btn btn-info" id="gotoRecipients" onclick="window.location='Contacts.html'">Manage Recipients</button>
 				</div>
+				<div class="form-group">
+					<div class="dropdown">
+						<button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" id="cardRecipient">Choose a Recipient</button>
+						<div class="dropdown-menu" id="newRecipient"></div>
+					</div>
+				</div>
+				<!--
 				<div class="form-group">
 					<label for="recipientName">Recipient Name</label>
 					<input type="text" class="form-control" id="newRecipientName" placeholder="Required">
@@ -60,6 +68,7 @@
 					<label for="recipientEmail">Recipient Email</label>
 					<input type="email" class="form-control" id="newRecipientEmail" placeholder="Required">
 				</div>
+				-->
 				<div class="form-group">
 					<div class="dropdown">
 						<button type="button" class="btn btn-secondary dropdown-toggle"  data-toggle="dropdown" id="cardOrientation">Card Orientation</button>

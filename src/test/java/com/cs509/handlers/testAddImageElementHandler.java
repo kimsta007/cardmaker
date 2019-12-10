@@ -41,6 +41,6 @@ public class testAddImageElementHandler {
 
         JsonNode outputNode = Jackson.fromJsonString(output.toString(), JsonNode.class);
         String code  = outputNode.get("statusCode").asText();
-        Assert.assertEquals("400", code);
+        Assert.assertEquals("200", code);
     }
 }

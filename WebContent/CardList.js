@@ -77,10 +77,17 @@ $(document).ready(function() {
 	});	
 	
 	$("#listAllCards").click(function(){
-		$('#recipientSelect').html('Recipient');
-		$('#eventSelect').html('Event');
 		displayCards();
 	})
+	
+	$("#newRecipient a").click(function(){
+		$('.c-option').removeClass('active');
+		$(this).addClass('active');
+		newRecipient = $(this).text().split(" ");
+		newRecipientName = newRecipient[0];
+		newRecipientEmail = newRecipient[2];
+		$('#cardRecipient').html($(this).text());
+	});
 	
 	$("#newCardOrientation a").click(function(){
 		$('.orientation-option').removeClass('active');
@@ -99,11 +106,11 @@ $(document).ready(function() {
 	$('#createCard').click(function(){
 		var newCard = {
 				cardOrientation: orientationMap[newCardOrientation],
-				recipientName: $("#newRecipientName").val(),
-				recipientEmail: $("#newRecipientEmail").val(),
+				recipientName: newRecipientName,
+				recipientEmail: newRecipientEmail,
 				eventType: eventMap[newCardEvent]
 		};
-		//console.log(JSON.stringify(newCard));
+		console.log(JSON.stringify(newCard));
 		$.ajax({
 			type: "post",
 			url: "https://eexxck49h4.execute-api.ca-central-1.amazonaws.com/Beta/createCard",
@@ -139,6 +146,34 @@ function displayCards(){
 				cardLen = cardList.length;
 				rList = [];
 				eList = [];
+				$('#recipientSelect').html('Recipient');
+				$('#eventSelect').html('Event');
+				$('#recipientList').html('');
+				$('#eventList').html('');
+				$.ajax({
+						url: "https://4aiz0zwpj2.execute-api.ca-central-1.amazonaws.com/Alpha/listRecipients",
+						type: "post",
+						dataType: "json",
+						async: false,
+						data: "",
+						success: function(d){
+							if(d.statusCode == '200'){
+								contactList = eval(d.body);
+								//console.log(contactList);
+								contactLen = contactList.length;
+								for(var i = 0; i < contactLen; i++){
+									$('#newRecipient').append("<a class='dropdown-item c-option' id='c" +contactList[i].recipientID+"'>"
+											+contactList[i].recipientName+" "+contactList[i].recipientSurname+" "+contactList[i].recipientEmail+"</a>");
+								}
+							}	
+							else
+								alert("Failed to load recipients.");
+						},
+						error: function(jqXHR,textStatus,errorThrown){
+							alert("Failed to load recipients.");
+							console.log(textStatus, errorThrown);
+						}
+				});
 				for(var i = 0; i < cardLen; i++){
 					if(rList.indexOf(cardList[i].recipientName) == -1)
 						rList.push(cardList[i].recipientName);
@@ -222,8 +257,8 @@ function cdDup(card){
 	card = eval(card);
 	var dupCard = {
 			cardOrientation: orientationMap[newCardOrientation],
-			recipientName: $("#newRecipientName").val(),
-			recipientEmail: $("#newRecipientEmail").val(),
+			recipientName: newRecipientName,
+			recipientEmail: newRecipientEmail,
 			eventType: eventMap[newCardEvent],
 			cardID: card.cardID
 			};

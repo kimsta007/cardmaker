@@ -27,7 +27,7 @@ public class CardMakerDAO {
 	
 	public int getRecipientID(String rName, String rEmail) throws Exception {
         int recipientID = 0;
-		PreparedStatement ps = conn.prepareStatement("SELECT recipientID FROM cs509db.recipient where recipientName = '" + rName + "' and"
+		PreparedStatement ps = conn.prepareStatement("SELECT recipientID FROM recipient where recipientName = '" + rName + "' and"
         		+ " recipientEmail = '" + rEmail + "';");	    
         ResultSet resultSet = ps.executeQuery();	
         while (resultSet.next()) {
@@ -40,7 +40,7 @@ public class CardMakerDAO {
 	
 	public ArrayList<HashMap<String, String>> createCard(String cOrient, String eType, String rName, String rEmail) throws Exception {
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.card values(?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into card values(?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setInt (2, Integer.parseInt(cOrient));
 			ps.setInt(3, Integer.parseInt(eType));
@@ -98,15 +98,15 @@ public class CardMakerDAO {
 	public ArrayList<HashMap<String, String>> listAllRecipients() throws Exception {
 		 try {
 	            ArrayList<HashMap<String, String>> record = new ArrayList<HashMap<String, String>>();
-	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM cs509db.recipient;");	    
+	            PreparedStatement ps = conn.prepareStatement("SELECT * FROM recipient;");	    
 	            ResultSet resultSet = ps.executeQuery();	
 	            ResultSetMetaData rsMetaData = resultSet.getMetaData();
 	            while (resultSet.next()) {
 	            	HashMap<String, String> resultsMap = new HashMap<String,String>();
-	            	resultsMap.put(rsMetaData.getColumnName(0), resultSet.getString("recipientID"));
-	            	resultsMap.put(rsMetaData.getColumnName(1), resultSet.getString("recipientName"));
-	            	resultsMap.put(rsMetaData.getColumnName(2), resultSet.getString("recipientSurname"));	
-	            	resultsMap.put(rsMetaData.getColumnName(3), resultSet.getString("recipientEmail"));
+	            	resultsMap.put(rsMetaData.getColumnName(1), resultSet.getString("recipientID"));
+	            	resultsMap.put(rsMetaData.getColumnName(2), resultSet.getString("recipientName"));
+	            	resultsMap.put(rsMetaData.getColumnName(3), resultSet.getString("recipientSurname"));	
+	            	resultsMap.put(rsMetaData.getColumnName(4), resultSet.getString("recipientEmail"));
 	            	record.add(resultsMap);
 	            }
 	            resultSet.close();
@@ -147,7 +147,7 @@ public class CardMakerDAO {
 	
 	public ArrayList<HashMap<String, String>> addRecipient(String rName, String rSurname, String rEmail) throws Exception {
 		try {
-			PreparedStatement ps = conn.prepareStatement("Insert into cs509db.recipient values(?,?,?,?)");
+			PreparedStatement ps = conn.prepareStatement("Insert into recipient values(?,?,?,?)");
 			ps.setNull(1,0);
 			ps.setString(2, rName);
 			ps.setString(3, rSurname);

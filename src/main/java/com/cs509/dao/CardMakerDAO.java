@@ -334,6 +334,20 @@ public class CardMakerDAO {
 		}
 	}
 	
+	public String updateImageElement(String xOrient, String yOrient, String width, String height, String imageID) throws Exception{
+		try {
+			PreparedStatement ps = 
+				conn.prepareStatement("update image set xOrient = "+ Integer.parseInt(xOrient) +
+						", yOrient = " + Integer.parseInt(yOrient) + ", width = " + Integer.parseInt(width) + ", height = " + Integer.parseInt(height) + 
+						" where imageID = " + Integer.parseInt(imageID) + ";");
+				ps.execute();
+				ps.close();
+			return "Image updated.";
+		} catch (Exception ex) {
+			throw new Exception("Failed to update Image." + ex.getMessage());
+		}
+	}
+	
 	public String deleteImageElement(String imageID) throws Exception {
 		try {
 			PreparedStatement ps = 

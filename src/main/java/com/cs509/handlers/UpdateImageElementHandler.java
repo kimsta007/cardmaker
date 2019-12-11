@@ -45,17 +45,13 @@ public class UpdateImageElementHandler implements RequestStreamHandler {
 			this.formatResponse(new Gson().toJson("Unable to process input"), 422);		
 		}
 		
-		ImageParser parser = new ImageParser(); 
 		try {
-			String src = parsedValues.get("imageName");
-			String base64String = parsedValues.get("base64String");
 			String xOrient = parsedValues.get("xOrient");
 			String yOrient = parsedValues.get("yOrient");
 			String width = parsedValues.get("width");
 			String height = parsedValues.get("height");
 			String imageID = parsedValues.get("imageID");
-			String url = new S3Utils().uploadImage(parser.decodeToImage(base64String), src);
-			this.formatResponse(new Gson().toJson(dao.updateImageElement(url, xOrient, yOrient, width, height, imageID)), 200);
+			this.formatResponse(new Gson().toJson(dao.updateImageElement(xOrient, yOrient, width, height, imageID)), 200);
 		} catch (Exception e) {
 			this.formatResponse(new Gson().toJson(e.getMessage()), 400);
 		}

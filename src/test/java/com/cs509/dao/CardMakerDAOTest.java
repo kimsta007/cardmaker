@@ -3,13 +3,19 @@ package com.cs509.dao;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import com.cs509.utils.DBUtils;
 
+@RunWith(MockitoJUnitRunner.class)
 public class CardMakerDAOTest {
-
-	@Test
-	public void testGetRecientID() {
+    @Mock 
+    CardMakerDAO dao;
+	
+    @Test
+	public void testDBConn() {
 		java.sql.Connection conn;		
 		try {
 			conn = DBUtils.connect();
@@ -19,5 +25,10 @@ public class CardMakerDAOTest {
 		} catch (Exception e) {
 		}
 	}
+    
+    @Test
+    public void listAllCardsTest() throws Exception {
+    	assertNotNull(dao.listAllCards());
+    }
 
 }

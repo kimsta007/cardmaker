@@ -84,48 +84,10 @@
                     </execution>
                 </executions>
             </plugin>
-           <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-
-                    <executions>
-                        <execution>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>shade</goal>
-                            </goals>
-                            <configuration>
-                                <transformers>
-                                    <transformer implementation= ”org.apache.maven.plugins.shade.resource.ManifestResourceTransformer”>
-                                    <mainClass>
-                                        path.to.MainClass
-                                    </mainClass>
-                                </transformers>
-
-                            <createDependencyReducedPom>
-                                false
-                            </createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
-
-
-</plugin>
--->
-
-
-
     </plugins>
     </build>
 
     <dependencies>
-
-    <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk -->
-   <!-- <dependency>
-        <groupId>com.amazonaws</groupId>
-        <artifactId>aws-java-sdk</artifactId>
-        <version>1.11.659</version>
-    </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-lambda -->
         <dependency>
@@ -133,15 +95,28 @@
             <artifactId>aws-java-sdk-lambda</artifactId>
             <version>1.11.664</version>
         </dependency>
-
-
-        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+        
     <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-core</artifactId>
-        <version>5.4.7.Final</version>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>amazon-kinesis-client</artifactId>
+      <version>1.2.1</version>
+      <scope>compile</scope>
     </dependency>
 
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-ses</artifactId>
+      <version>1.11.641</version>
+      <scope>compile</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-costexplorer</artifactId>
+      <version>1.11.641</version>
+      <scope>compile</scope>
+    </dependency>
+    
     <dependency>
         <groupId>com.amazonaws</groupId>
         <artifactId>aws-lambda-java-core</artifactId>
@@ -158,6 +133,19 @@
 	    <groupId>com.amazonaws</groupId>
 	    <artifactId>aws-java-sdk-s3</artifactId>
 	    <version>1.11.677</version>
+	</dependency>    
+        
+    <dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-all</artifactId>
+	    <version>1.9.5</version>
+	    <scope>test</scope>
+	</dependency>
+    
+    <dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	    <version>2.0.0-alpha1</version>
 	</dependency>    
         
     <dependency>
